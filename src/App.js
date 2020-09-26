@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import Items from './components/items';
+import Search from './components/search';
+
+import GlobalStyle from './styles/globalStyle';
+import { GlobalProvider } from './context/GlobalState';
+export function Login() {
+  return <div></div>;
+}
+
+export function Main({ children }) {
+  return <main>{children}</main>;
+}
+
+export function Header() {
+  return (
+    <header className='App-header'>
+      <div>Bookshelf logo</div>
+    </header>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalProvider>
+      <div className='App'>
+        <GlobalStyle />
+
+        <Header />
+        <Search />
+        <Main>
+          <Items />
+          <Login />
+        </Main>
+      </div>
+    </GlobalProvider>
   );
 }
 
