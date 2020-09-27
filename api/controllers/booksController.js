@@ -83,7 +83,7 @@ exports.updateBook = (req, res) => {
       if (err) {
         res.send(err);
       } else {
-        console.log(typeof result, result);
+        console.log(result);
         res.json(result);
       }
     }
