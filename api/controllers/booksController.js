@@ -1,16 +1,15 @@
 const bookStore = require('../models/books');
 const { v4: uuidv4 } = require('uuid');
+const jwt = require('jsonwebtoken');
 
 //import all of our models, a singleton is implemented, once this is required it is available throught the app
 
 // get all books
 exports.getBooks = (req, res) => {
-  console.log('func');
   bookStore.find({}, function (err, result) {
     if (err) {
       res.send(err);
     } else {
-      console.log(typeof result, result);
       res.json(result);
     }
   });
@@ -32,14 +31,21 @@ exports.getBook = (req, res) => {
 
 // delete a book
 exports.removeBook = (req, res) => {
-  const { id } = req.params;
-  console.log(`func get book: ${id}`);
-  return bookStore.remove({ BOOK_ID: id }, function (err, result) {
+  console.log(req.token);
+  jwt.verify(req.token, 'secretkey', (err, authData) => {
     if (err) {
-      res.send(err);
+      res.sendStatus(403);
     } else {
-      console.log(typeof result, result);
-      res.json(result);
+      const { id } = req.params;
+      console.log(`func get book: ${id}`);
+      return bookStore.remove({ BOOK_ID: id }, function (err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+          console.log(typeof result, result);
+          res.json({ result, authData, message: 'Deleted an item' });
+        }
+      });
     }
   });
 };
