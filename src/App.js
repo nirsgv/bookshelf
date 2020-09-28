@@ -3,6 +3,7 @@ import Items from './components/items';
 import Search from './components/search';
 import Login from './components/login';
 import Header from './components/header';
+import MyItems from './components/myItems';
 
 import GlobalStyle from './styles/globalStyle';
 import { GlobalProvider } from './context/GlobalState';
@@ -22,6 +23,7 @@ function App() {
         <Main>
           <Items />
           <Login />
+          <MyItems />
         </Main>
       </div>
     </GlobalProvider>
