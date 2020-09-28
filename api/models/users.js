@@ -11,10 +11,6 @@ const schema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    CREATED_AT: {
-      type: Date,
-      trim: true,
-    },
     PURCHASED_BOOKS: {
       type: [String],
       trim: true,
@@ -23,9 +19,13 @@ const schema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    ROLE: {
+      type: String,
+      trim: true,
+    },
   },
   {
-    collection: 'bookstore_db',
+    collection: 'users',
   }
 );
 

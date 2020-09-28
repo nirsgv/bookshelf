@@ -1,23 +1,14 @@
 import React, { useEffect } from 'react';
 import Items from './components/items';
 import Search from './components/search';
+import Login from './components/login';
+import Header from './components/header';
 
 import GlobalStyle from './styles/globalStyle';
 import { GlobalProvider } from './context/GlobalState';
-export function Login() {
-  return <div></div>;
-}
 
 export function Main({ children }) {
   return <main>{children}</main>;
-}
-
-export function Header() {
-  return (
-    <header className='App-header'>
-      <div>Bookshelf logo</div>
-    </header>
-  );
 }
 
 function App() {
