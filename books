@@ -1,0 +1,37 @@
+[{
+  "BOOK_ID": "asdkalsndonwefwef",
+  "PRICE": 20,
+  "WRITTEN_BY": "George Fitz",
+  "PUBLISHED_BY": "Andromedia Inc.",
+  "TITLE": "The history of"
+},
+{
+  "BOOK_ID": "sddff55544",
+  "PRICE": 30,
+  "WRITTEN_BY": "Bobby Fisherman",
+  "PUBLISHED_BY": "Andromedia Inc.",
+  "TITLE": "The big book"
+},
+{
+  "BOOK_ID": "dfgdfg324234",
+  "PRICE": 40,
+  "WRITTEN_BY": "Joe Piscepo",
+  "PUBLISHED_BY": "Andromedia Inc.",
+  "TITLE": "Jasmine"
+}]
+
+ [ {
+  "USER_ID":"joe@gmail.com",
+  "FULL_NAME":"Johnny Rotten",
+  "PURCHASED_BOOKS":["02a9a9aa-8819-4190-9649-7aa955c41c69","74f8e1f3-b1c8-45c0-863f-5e735d8ca60c","ee3665be-e96c-4c45-a62a-da3dab78d404"],
+  "PASSWORD":"user_joe",
+  "ROLE":"User"
+  },
+{ 
+  "USER_ID":"joe@yahoo.com",
+  "FULL_NAME":"Johnattan seagal",
+  "PURCHASED_BOOKS":["ee3665be-e96c-4c45-a62a-da3dab78d404","a07b3812-0222-4502-8d33-816737999eaf","47973684-9a08-4921-983f-998468124356"],
+  "PASSWORD":"admin_joe",
+  "ROLE":"Admin"
+  }
+]

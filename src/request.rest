@@ -1,0 +1,20 @@
+# delete http://localhost:8000/api/remove/a07b3812-0222-4502-8d33-816737999eaf
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpvZUBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTYwMTMwMjc4OSwiZXhwIjoxNjAxMzAzMDg5fQ.eYYjO6goCSrBUPPJGuEgdP52fmuVfPz4XluVv3mRwUM
+
+
+
+get http://localhost:8000/api/bookbyid/47973684-9a08-4921-983f-998468124356
+
+
+# post http://localhost:8000/api/login
+
+
+# post http://localhost:8000/api/add
+# Content-Type: application/json
+
+# {
+#     "PRICE": 50,
+#     "WRITTEN_BY": "Nicholas Sparks",
+#     "PUBLISHED_BY": "Andromediy",
+#     "TITLE": "The Return"
+# }
