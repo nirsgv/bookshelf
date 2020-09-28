@@ -3,18 +3,18 @@
 
 
 
-get http://localhost:8000/api/bookbyid/47973684-9a08-4921-983f-998468124356
+# get http://localhost:8000/api/bookbyid/47973684-9a08-4921-983f-998468124356
 
 
 # post http://localhost:8000/api/login
 
 
-# post http://localhost:8000/api/add
-# Content-Type: application/json
+post http://localhost:8000/api/add
+Content-Type: application/json
 
-# {
-#     "PRICE": 50,
-#     "WRITTEN_BY": "Nicholas Sparks",
-#     "PUBLISHED_BY": "Andromediy",
-#     "TITLE": "The Return"
-# }
+{
+    "PRICE": 39,
+    "WRITTEN_BY": "Simply Delicious Recipes",
+    "PUBLISHED_BY": "Andromediy",
+    "TITLE": "Grime and Punishment"
+}

@@ -72,7 +72,7 @@ export function ItemEdit({ BOOK_ID, PRICE, WRITTEN_BY, PUBLISHED_BY, TITLE }) {
               token,
             },
             setBooks
-          )
+          ).then((data) => setBooks(data))
         }
       >
         Submit!

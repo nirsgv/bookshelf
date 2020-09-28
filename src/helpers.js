@@ -16,8 +16,8 @@ export const removeItemRemote = async (id, cb, token) => {
     .then((data) => getAllItems(cb));
 };
 
-export const editItemRemote = async (itemData, cb) => {
-  await fetch(window.location.origin + '/api/update', {
+export const editItemRemote = (itemData) => {
+  return fetch(window.location.origin + '/api/update', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -26,5 +26,15 @@ export const editItemRemote = async (itemData, cb) => {
     body: JSON.stringify(itemData),
   })
     .then((response) => response.json())
-    .then((data) => getAllItems(cb));
+    .then((data) => {
+      return getAllItems();
+    });
+};
+
+export const getBookById = async (bookId) => {
+  await fetch(window.location.origin + '/api/bookbyid/' + bookId)
+    .then((response) => response.json())
+    .then((book) => {
+      return book;
+    });
 };

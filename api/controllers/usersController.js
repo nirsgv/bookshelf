@@ -1,8 +1,7 @@
 const usersStore = require('../models/users');
 const jwt = require('jsonwebtoken');
-const bcryptjs = require('bcryptjs');
 
-const secret = 'asdl,a[c[psssf,12';
+const secret = process.env.SECRET;
 
 exports.authenticateUser = (req, res) => {
   const { email, password } = req.body;

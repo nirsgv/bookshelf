@@ -1,16 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import { MyItemsWrap } from './common/styledComponents';
-// import { getBookById } from '../helpers';
-
-export const getBookById = (bookId) => {
-  return fetch(window.location.origin + '/api/bookbyid/' + bookId)
-    .then((response) => response.json())
-    .then((book) => {
-      console.log('ret', book[0]);
-      return book[0];
-    });
-};
+import { getBookById } from '../helpers';
 
 export function Book(book) {
   const [bookItem, setBookItem] = useState({});
