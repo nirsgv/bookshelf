@@ -49,8 +49,8 @@ app.delete(
   usersController.verifyToken,
   booksController.removeBook
 );
-app.post('/api/add', booksController.addBook);
-// app.post('/api/add', usersController.verifyToken, booksController.addBook);
+// app.post('/api/add', booksController.addBook);
+app.post('/api/add', usersController.verifyToken, booksController.addBook);
 
 app.put('/api/update', usersController.verifyToken, booksController.updateBook);
 app.get('/api/bookbytitle/:title', booksController.searchBookByTitle);
