@@ -31,23 +31,21 @@ exports.getBook = (req, res) => {
 
 // delete a book
 exports.removeBook = (req, res) => {
-  console.log(req.token);
-  jwt.verify(req.token, 'secretkey', (err, authData) => {
-    if (err) {
-      res.sendStatus(403);
-    } else {
-      const { id } = req.params;
-      console.log(`func get book: ${id}`);
-      return bookStore.remove({ BOOK_ID: id }, function (err, result) {
-        if (err) {
-          res.send(err);
-        } else {
-          console.log(typeof result, result);
-          res.json({ result, authData, message: 'Deleted an item' });
-        }
-      });
-    }
-  });
+  console.log(req.decoded);
+  const { id } = req.params;
+  console.log(`func get book: ${id}`);
+  if (req.decoded.role === 'Admin') {
+    return bookStore.remove({ BOOK_ID: id }, function (err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        console.log(typeof result, result);
+        res.json({ result, message: 'Deleted an item' });
+      }
+    });
+  } else {
+    res.status(403);
+  }
 };
 
 // add a book
@@ -75,25 +73,30 @@ exports.addBook = (req, res) => {
 // update a book
 exports.updateBook = (req, res) => {
   const { BOOK_ID, PRICE, WRITTEN_BY, PUBLISHED_BY, TITLE } = req.body;
-  bookStore.findOneAndUpdate(
-    {
-      BOOK_ID,
-    },
-    {
-      PRICE,
-      WRITTEN_BY,
-      PUBLISHED_BY,
-      TITLE,
-    },
-    function (err, result) {
-      if (err) {
-        res.send(err);
-      } else {
-        console.log(result);
-        res.json(result);
+
+  if (req.decoded.role === 'Admin') {
+    bookStore.findOneAndUpdate(
+      {
+        BOOK_ID,
+      },
+      {
+        PRICE,
+        WRITTEN_BY,
+        PUBLISHED_BY,
+        TITLE,
+      },
+      function (err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+          console.log(result);
+          res.json(result);
+        }
       }
-    }
-  );
+    );
+  } else {
+    return res.status(403);
+  }
 };
 
 // get book by id
@@ -119,7 +122,6 @@ exports.searchBookById = (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      console.log(typeof result, result);
       res.json(result);
     }
   });

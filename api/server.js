@@ -49,11 +49,10 @@ app.delete(
   usersController.verifyToken,
   booksController.removeBook
 );
-app.post('/api/add', booksController.addBook);
-app.put('/api/update', booksController.updateBook);
+app.post('/api/add', usersController.verifyToken, booksController.addBook);
+app.put('/api/update', usersController.verifyToken, booksController.updateBook);
 app.get('/api/bookbytitle/:title', booksController.searchBookByTitle);
 app.get('/api/bookbyid/:id', booksController.searchBookById);
-
 app.post('/api/login', usersController.authenticateUser);
 
 // FORMAT OF TOKEN
@@ -65,20 +64,7 @@ function tmpMiddle(req, res, next) {
   next();
 }
 
-app.get('/about', function (req, res) {
-  return res.sendFile(path.resolve(__dirname + '/../build/index.html'));
-});
-app.get('/track/*', function (req, res) {
-  return res.sendFile(path.resolve(__dirname + '/../build/index.html'));
-});
-app.get('/concert/*', function (req, res) {
-  return res.sendFile(path.resolve(__dirname + '/../build/index.html'));
-});
-app.get('/editorial', function (req, res) {
-  return res.sendFile(path.resolve(__dirname + '/../build/index.html'));
-});
-
-app.get('/shows', function (req, res) {
+app.get('/', function (req, res) {
   return res.sendFile(path.resolve(__dirname + '/../build/index.html'));
 });
 
