@@ -16,14 +16,14 @@ export const removeItemRemote = ({ id, token }) => {
     .then((data) => getAllItems());
 };
 
-export const purchaseItem = ({ id, token }) => {
+export const purchaseItem = ({ bookId, userId, token }) => {
   return fetch(window.location.origin + '/api/purchase', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ id, token }),
+    body: JSON.stringify({ bookId, userId, token }),
   })
     .then((response) => response.json())
     .then((data) => getAllItems());

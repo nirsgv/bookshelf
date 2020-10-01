@@ -119,9 +119,11 @@ export default function Item(props) {
         <button
           type='button'
           onClick={() =>
-            purchaseItem({ id: props.BOOK_ID, token }).then((data) =>
-              setBooks(data)
-            )
+            purchaseItem({
+              bookId: props.BOOK_ID,
+              userId: user.USER_ID,
+              token,
+            }).then((data) => console(data))
           }
         >
           Purchase

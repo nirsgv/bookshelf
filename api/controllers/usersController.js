@@ -23,6 +23,7 @@ exports.authenticateUser = (req, res) => {
           FULL_NAME: user.FULL_NAME,
           ROLE: user.ROLE,
           PURCHASED_BOOKS: user.PURCHASED_BOOKS,
+          USER_ID: user.USER_ID,
         };
         res.send(returnedUser);
       } else {
@@ -61,13 +62,15 @@ exports.verifyToken = (req, res, next) => {
 
 // purchase a book
 exports.purchaseBook = (req, res) => {
-  const { id } = req.body;
+  const { bookId, userId } = req.body;
 
-  console.log(`func purchase book: ${id}`);
+  console.log(`func purchase book: ${bookId} 
+                User id is: ${userId}`);
   if (req.decoded.role === 'User') {
     return usersStore.findOneAndUpdate(
-      { USER_ID: id },
-      { $push: { PURCHASED_BOOKS: id } },
+      { USER_ID: userId },
+      { $push: { PURCHASED_BOOKS: bookId } },
+      { new: true },
       function (err, result) {
         if (err) {
           res.send(err);

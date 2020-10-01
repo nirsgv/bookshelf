@@ -126,28 +126,3 @@ exports.searchBookById = (req, res) => {
     }
   });
 };
-
-exports.searchTracks = (req, res) => {
-  const { filteredBySearch, searchArtistNames, searchTrackTitles } = req.body;
-  let choice;
-  const regPat = { $regex: filteredBySearch, $options: 'i' };
-  if (
-    (searchArtistNames && searchTrackTitles) ||
-    (!searchArtistNames && !searchTrackTitles)
-  ) {
-    choice = {
-      $or: [{ ARTIST_NAME: regPat }, { TRACK_TITLE: regPat }],
-    };
-  } else if (searchArtistNames) {
-    choice = { ARTIST_NAME: regPat };
-  } else {
-    choice = { TRACK_TITLE: regPat };
-  }
-  tracksStore.find(choice, { ID: 1, _id: 0 }, function (err, result) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.json(result);
-    }
-  });
-};
