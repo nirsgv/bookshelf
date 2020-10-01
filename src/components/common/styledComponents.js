@@ -62,7 +62,14 @@ const MyItemsWrap = styled.section`
   left: 0;
   width: 100vw;
   height: 10rem;
-  background-color: blue;
+  background-color: #ccc;
+  display: flex;
+`;
+
+const MyItemsItem = styled.div`
+  background-color: #acacac;
+  padding: 2rem;
+  margin-right: 2rem;
 `;
 
 export {
@@ -73,4 +80,5 @@ export {
   LoginSection,
   LoginForm,
   MyItemsWrap,
+  MyItemsItem,
 };

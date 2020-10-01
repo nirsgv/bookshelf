@@ -4,8 +4,8 @@ export const getAllItems = () => {
   );
 };
 
-export const removeItemRemote = async (id, cb, token) => {
-  await fetch(window.location.origin + '/api/remove/' + id, {
+export const removeItemRemote = ({ id, token }) => {
+  return fetch(window.location.origin + '/api/remove/' + id, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -13,12 +13,25 @@ export const removeItemRemote = async (id, cb, token) => {
     },
   })
     .then((response) => response.json())
-    .then((data) => getAllItems(cb));
+    .then((data) => getAllItems());
+};
+
+export const purchaseItem = ({ id, token }) => {
+  return fetch(window.location.origin + '/api/purchase', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ id, token }),
+  })
+    .then((response) => response.json())
+    .then((data) => getAllItems());
 };
 
 export const editItemRemote = (itemData) => {
   return fetch(window.location.origin + '/api/update', {
-    method: 'PUT',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${itemData.token}`,
@@ -31,8 +44,8 @@ export const editItemRemote = (itemData) => {
     });
 };
 
-export const getBookById = async (bookId) => {
-  await fetch(window.location.origin + '/api/bookbyid/' + bookId)
+export const getBookById = (bookId) => {
+  return fetch(window.location.origin + '/api/bookbyid/' + bookId)
     .then((response) => response.json())
     .then((book) => {
       return book;

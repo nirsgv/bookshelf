@@ -13,7 +13,7 @@ export default function Login() {
   });
   const { EMAIL, PASSWORD } = state;
 
-  const submitForm = async (e) => {
+  const submitForm = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
     const userDetails = {
@@ -22,14 +22,13 @@ export default function Login() {
     };
     // console.log(userDetails);
 
-    await fetch(window.location.origin + '/api/login', {
+    fetch(window.location.origin + '/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userDetails),
     })
       .then((response) => response.json())
       .then((user) => setCurrentUser(user));
-    // .then((data) => getAllItems(cb));
   };
 
   if (!isLoginScreen) return null;
@@ -42,6 +41,22 @@ export default function Login() {
         }}
       >
         <button onClick={toggleLoginScreen}>x</button>
+        <button
+          onClick={(e) => {
+            dispatch({ type: 'SET_EMAIL', payload: 'joe@gmail.com' });
+            dispatch({ type: 'SET_PASSWORD', payload: 'user_joe' });
+          }}
+        >
+          User Joe
+        </button>
+        <button
+          onClick={(e) => {
+            dispatch({ type: 'SET_EMAIL', payload: 'joe@yahoo.com' });
+            dispatch({ type: 'SET_PASSWORD', payload: 'admin_joe' });
+          }}
+        >
+          Admin Joe
+        </button>
         <input
           type='text'
           name='email'

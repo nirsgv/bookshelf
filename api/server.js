@@ -4,12 +4,9 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 
 app.use(express.static(path.resolve(__dirname + '/../build')));
-// require('dotenv').config();
 require('dotenv').config({
   path: path.resolve(__dirname + '/../.env'),
 });
-console.log(process.env.DATABASE);
-// console.log(process.env.REACT_APP_DATABASE);
 const booksController = require('./controllers/booksController');
 const usersController = require('./controllers/usersController');
 const mongoose = require('mongoose');
@@ -26,7 +23,6 @@ const connection = mongoose.connection;
 connection.once('open', function () {
   console.log(`Connection with MongoDB was successful :smile:`);
 });
-app.get('/hey', (req, res) => res.send('Yo!'));
 
 mongoose.Promise = global.Promise; // Tells Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
@@ -42,7 +38,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get('/api/books', tmpMiddle, booksController.getBooks);
+app.get('/api/books', booksController.getBooks);
 app.get('/api/book/:id', booksController.getBook);
 app.delete(
   '/api/remove/:id',
@@ -51,6 +47,11 @@ app.delete(
 );
 // app.post('/api/add', booksController.addBook);
 app.post('/api/add', usersController.verifyToken, booksController.addBook);
+app.post(
+  '/api/purchase',
+  usersController.verifyToken,
+  usersController.purchaseBook
+);
 
 app.put('/api/update', usersController.verifyToken, booksController.updateBook);
 app.get('/api/bookbytitle/:title', booksController.searchBookByTitle);

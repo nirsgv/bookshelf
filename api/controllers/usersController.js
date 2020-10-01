@@ -5,15 +5,15 @@ const secret = process.env.SECRET;
 
 exports.authenticateUser = (req, res) => {
   const { email, password } = req.body;
-  usersStore.find({ USER_ID: email, PASSWORD: password }, function (
+  usersStore.findOne({ USER_ID: email, PASSWORD: password }, function (
     err,
     result
   ) {
     if (err) {
       res.send(err);
     } else {
-      if (result.length > 0) {
-        const user = result[0];
+      if (result) {
+        const user = result;
         const token = jwt.sign({ id: user.USER_ID, role: user.ROLE }, secret, {
           expiresIn: 300,
         });
@@ -56,5 +56,28 @@ exports.verifyToken = (req, res, next) => {
   } else {
     // Forbidden
     res.sendStatus(403);
+  }
+};
+
+// purchase a book
+exports.purchaseBook = (req, res) => {
+  const { id } = req.body;
+
+  console.log(`func purchase book: ${id}`);
+  if (req.decoded.role === 'User') {
+    return usersStore.findOneAndUpdate(
+      { USER_ID: id },
+      { $push: { PURCHASED_BOOKS: id } },
+      function (err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+          console.log(typeof result, result);
+          res.json({ result, message: 'Purchased an item' });
+        }
+      }
+    );
+  } else {
+    res.status(403);
   }
 };

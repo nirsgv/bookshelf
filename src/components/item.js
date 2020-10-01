@@ -1,9 +1,9 @@
-import React, { useEffect, useReducer, useContext, useState } from 'react';
+import React, { useReducer, useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 
 import { GridItem } from './common';
 import editedItemReducer from '../context/editedItemReducer';
-import { removeItemRemote, editItemRemote } from '../helpers';
+import { removeItemRemote, editItemRemote, purchaseItem } from '../helpers';
 
 export function ItemEdit({ BOOK_ID, PRICE, WRITTEN_BY, PUBLISHED_BY, TITLE }) {
   const { setBooks, user } = useContext(GlobalContext);
@@ -110,20 +110,40 @@ export default function Item(props) {
   const [isEditMode, setEditMode] = useState(false);
   const { removeBook, setBooks, user } = useContext(GlobalContext);
   const token = user ? user.TOKEN : '';
+
   return (
     <GridItem>
       {!isEditMode ? <ItemDisplay {...props} /> : <ItemEdit {...props} />}
 
-      <button>Purchase</button>
-      <button type='button' onClick={() => setEditMode(!isEditMode)}>
-        Edit
-      </button>
-      <button
-        type='button'
-        onClick={() => removeItemRemote(props.BOOK_ID, setBooks, token)}
-      >
-        Delete
-      </button>
+      {user && user.ROLE === 'User' && (
+        <button
+          type='button'
+          onClick={() =>
+            purchaseItem({ id: props.BOOK_ID, token }).then((data) =>
+              setBooks(data)
+            )
+          }
+        >
+          Purchase
+        </button>
+      )}
+      {user && user.ROLE === 'Admin' && (
+        <>
+          <button type='button' onClick={() => setEditMode(!isEditMode)}>
+            Edit
+          </button>
+          <button
+            type='button'
+            onClick={() =>
+              removeItemRemote({ id: props.BOOK_ID, token }).then((data) =>
+                setBooks(data)
+              )
+            }
+          >
+            Delete
+          </button>
+        </>
+      )}
     </GridItem>
   );
 }

@@ -5,16 +5,17 @@
 
 # get http://localhost:8000/api/bookbyid/47973684-9a08-4921-983f-998468124356
 
+# get http://localhost:8000/api/getbooks
+
 
 # post http://localhost:8000/api/login
 
 
 post http://localhost:8000/api/add
 Content-Type: application/json
-
 {
-    "PRICE": 39,
-    "WRITTEN_BY": "Simply Delicious Recipes",
+    "PRICE": 9,
+    "WRITTEN_BY": "Fog Doyle",
     "PUBLISHED_BY": "Andromediy",
-    "TITLE": "Grime and Punishment"
+    "TITLE": "Tihuana67"
 }

@@ -1,11 +1,8 @@
-import React, { useEffect, useReducer, useContext } from 'react';
+import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
-import { GridList, GridItem } from './common';
 
 export default function Header() {
-  const { isLoginScreen, toggleLoginScreen, user, setCurrentUser } = useContext(
-    GlobalContext
-  );
+  const { toggleLoginScreen, user, setCurrentUser } = useContext(GlobalContext);
 
   return (
     <header className='App-header'>

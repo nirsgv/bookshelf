@@ -1,26 +1,31 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
-import { MyItemsWrap } from './common/styledComponents';
+import { MyItemsWrap, MyItemsItem } from './common/styledComponents';
 import { getBookById } from '../helpers';
 
-export function Book(book) {
+function BookCard({ PUBLISHED_BY, TITLE, WRITTEN_BY }) {
+  return (
+    <MyItemsItem>
+      <h3>{PUBLISHED_BY}</h3>
+      <h3>{TITLE}</h3>
+      <h3>{WRITTEN_BY}</h3>
+    </MyItemsItem>
+  );
+}
+
+function Book(book) {
   const [bookItem, setBookItem] = useState({});
   useEffect(() => {
-    console.log(book);
-    getBookById(book.bookId).then((par) => {
-      console.log('returned', par, arguments);
-      setBookItem(par);
-    });
+    getBookById(book.bookId).then((par) => setBookItem(par));
   }, []);
-  return <div>something</div>;
+  if (!bookItem) return null;
+  return <BookCard {...bookItem} />;
 }
 
 export default function MyItems() {
   const { user } = useContext(GlobalContext);
-
-  // useEffect(() => {}, []);
-
-  if (!user || !user.PURCHASED_BOOKS) return null;
+  console.log(user);
+  if (!user || !user.ROLE === 'User' || !user.PURCHASED_BOOKS) return null;
 
   return (
     <MyItemsWrap>

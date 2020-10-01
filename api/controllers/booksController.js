@@ -118,7 +118,7 @@ exports.searchBookByTitle = (req, res) => {
 exports.searchBookById = (req, res) => {
   const { id } = req.params;
 
-  bookStore.find({ BOOK_ID: id }, function (err, result) {
+  bookStore.findOne({ BOOK_ID: id }, function (err, result) {
     if (err) {
       res.send(err);
     } else {
