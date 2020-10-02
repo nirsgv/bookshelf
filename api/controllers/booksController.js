@@ -1,6 +1,5 @@
 const bookStore = require('../models/books');
 const { v4: uuidv4 } = require('uuid');
-const jwt = require('jsonwebtoken');
 
 //import all of our models, a singleton is implemented, once this is required it is available throught the app
 

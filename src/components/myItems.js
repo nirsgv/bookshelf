@@ -29,8 +29,8 @@ export default function MyItems() {
 
   return (
     <MyItemsWrap>
-      {user.PURCHASED_BOOKS.map((book) => (
-        <Book key={book} bookId={book} />
+      {user.PURCHASED_BOOKS.map((book, index) => (
+        <Book key={index} bookId={book} />
       ))}
     </MyItemsWrap>
   );

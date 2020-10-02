@@ -20,6 +20,15 @@ export default (state, action) => {
         ...state,
         user: action.payload,
       };
+    case 'SET_USER_PURCHASES':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          PURCHASED_BOOKS: action.payload,
+        },
+      };
+
     default:
       return state;
   }

@@ -32,6 +32,11 @@ export const GlobalProvider = ({ children }) => {
   function setCurrentUser(user) {
     dispatch({ type: 'SET_CURRENT_USER', payload: user });
   }
+
+  function setUserPurchases(purchases) {
+    debugger;
+    dispatch({ type: 'SET_USER_PURCHASES', payload: purchases });
+  }
   return (
     <GlobalContext.Provider
       value={{
@@ -43,6 +48,7 @@ export const GlobalProvider = ({ children }) => {
         removeBook,
         toggleLoginScreen,
         setCurrentUser,
+        setUserPurchases,
       }}
     >
       {children}

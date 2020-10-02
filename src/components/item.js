@@ -5,7 +5,14 @@ import { GridItem } from './common';
 import editedItemReducer from '../context/editedItemReducer';
 import { removeItemRemote, editItemRemote, purchaseItem } from '../helpers';
 
-export function ItemEdit({ BOOK_ID, PRICE, WRITTEN_BY, PUBLISHED_BY, TITLE }) {
+export function ItemEdit({
+  BOOK_ID,
+  PRICE,
+  WRITTEN_BY,
+  PUBLISHED_BY,
+  TITLE,
+  setEditMode,
+}) {
   const { setBooks, user } = useContext(GlobalContext);
   const token = user ? user.TOKEN : '';
 
@@ -72,7 +79,10 @@ export function ItemEdit({ BOOK_ID, PRICE, WRITTEN_BY, PUBLISHED_BY, TITLE }) {
               token,
             },
             setBooks
-          ).then((data) => setBooks(data))
+          ).then((data) => {
+            setBooks(data);
+            setEditMode(false);
+          })
         }
       >
         Submit!
@@ -108,12 +118,16 @@ export function ItemDisplay({
 
 export default function Item(props) {
   const [isEditMode, setEditMode] = useState(false);
-  const { removeBook, setBooks, user } = useContext(GlobalContext);
+  const { setUserPurchases, setBooks, user } = useContext(GlobalContext);
   const token = user ? user.TOKEN : '';
 
   return (
     <GridItem>
-      {!isEditMode ? <ItemDisplay {...props} /> : <ItemEdit {...props} />}
+      {!isEditMode ? (
+        <ItemDisplay {...props} />
+      ) : (
+        <ItemEdit {...props} setEditMode={setEditMode} />
+      )}
 
       {user && user.ROLE === 'User' && (
         <button
@@ -122,8 +136,9 @@ export default function Item(props) {
             purchaseItem({
               bookId: props.BOOK_ID,
               userId: user.USER_ID,
+              purchased: user.PURCHASED_BOOKS,
               token,
-            }).then((data) => console(data))
+            }).then((data) => setUserPurchases(data.returnPurchased))
           }
         >
           Purchase

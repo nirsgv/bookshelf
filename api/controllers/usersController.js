@@ -62,21 +62,18 @@ exports.verifyToken = (req, res, next) => {
 
 // purchase a book
 exports.purchaseBook = (req, res) => {
-  const { bookId, userId } = req.body;
+  const { bookId, userId, purchased } = req.body;
+  let returnPurchased = [...purchased, bookId];
 
-  console.log(`func purchase book: ${bookId} 
-                User id is: ${userId}`);
   if (req.decoded.role === 'User') {
-    return usersStore.findOneAndUpdate(
+    usersStore.findOneAndUpdate(
       { USER_ID: userId },
       { $push: { PURCHASED_BOOKS: bookId } },
-      { new: true },
       function (err, result) {
         if (err) {
           res.send(err);
         } else {
-          console.log(typeof result, result);
-          res.json({ result, message: 'Purchased an item' });
+          res.json({ returnPurchased, message: 'Purchased an item' });
         }
       }
     );

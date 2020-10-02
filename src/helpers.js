@@ -16,22 +16,20 @@ export const removeItemRemote = ({ id, token }) => {
     .then((data) => getAllItems());
 };
 
-export const purchaseItem = ({ bookId, userId, token }) => {
+export const purchaseItem = ({ bookId, userId, token, purchased }) => {
   return fetch(window.location.origin + '/api/purchase', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ bookId, userId, token }),
-  })
-    .then((response) => response.json())
-    .then((data) => getAllItems());
+    body: JSON.stringify({ bookId, userId, token, purchased }),
+  }).then((response) => response.json());
 };
 
 export const editItemRemote = (itemData) => {
   return fetch(window.location.origin + '/api/update', {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${itemData.token}`,
@@ -39,9 +37,7 @@ export const editItemRemote = (itemData) => {
     body: JSON.stringify(itemData),
   })
     .then((response) => response.json())
-    .then((data) => {
-      return getAllItems();
-    });
+    .then(() => getAllItems());
 };
 
 export const getBookById = (bookId) => {
