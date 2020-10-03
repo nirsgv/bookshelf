@@ -143,6 +143,7 @@ export default function Item(props) {
       setEditMode(true);
     }
   }, []);
+  const isOwned = user && user.PURCHASED_BOOKS.includes(props.BOOK_ID);
   return (
     <GridItem>
       {!isEditMode ? (
@@ -154,6 +155,7 @@ export default function Item(props) {
       {user && user.ROLE === 'User' && (
         <Button
           type='button'
+          disabled={isOwned}
           onClick={() =>
             purchaseItem({
               bookId: props.BOOK_ID,
@@ -163,7 +165,7 @@ export default function Item(props) {
             }).then((data) => setUserPurchases(data.returnPurchased))
           }
         >
-          Purchase
+          {!isOwned ? 'Purchase' : 'Purchased...'}
         </Button>
       )}
       {user && user.ROLE === 'Admin' && (
