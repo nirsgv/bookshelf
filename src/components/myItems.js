@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
-import { MyItemsWrap, MyItemsItem } from './common/styledComponents';
+import { MyItemsWrap, MyItemsBook } from './common/styledComponents';
 import { getBookById } from '../helpers';
 
 function BookCard({ PUBLISHED_BY, TITLE, WRITTEN_BY }) {
   return (
-    <MyItemsItem>
+    <MyItemsBook>
       <h3>{TITLE}</h3>
       <h3>{WRITTEN_BY}</h3>
-    </MyItemsItem>
+    </MyItemsBook>
   );
 }
 

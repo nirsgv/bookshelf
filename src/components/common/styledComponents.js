@@ -76,7 +76,7 @@ const MyItemsWrap = styled.section`
   }
 `;
 
-const MyItemsItem = styled.div`
+const MyItemsBook = styled.div`
   background-color: #acacac;
   padding: 2rem;
   margin-right: 2rem;
@@ -101,5 +101,5 @@ export {
   LoginSection,
   LoginForm,
   MyItemsWrap,
-  MyItemsItem,
+  MyItemsBook,
 };
