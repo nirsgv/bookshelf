@@ -12,6 +12,7 @@ export function ItemEdit({
   PUBLISHED_BY,
   TITLE,
   setEditMode,
+  BEING_INIT,
 }) {
   const { setBooks, user } = useContext(GlobalContext);
   const token = user ? user.TOKEN : '';
@@ -22,6 +23,7 @@ export function ItemEdit({
     WRITTEN_BY,
     PUBLISHED_BY,
     TITLE,
+    BEING_INIT,
   });
 
   return (
@@ -69,20 +71,19 @@ export function ItemEdit({
       <button
         type='button'
         onClick={() =>
-          editItemRemote(
-            {
-              BOOK_ID,
-              TITLE: state.TITLE,
-              WRITTEN_BY: state.WRITTEN_BY,
-              PUBLISHED_BY: state.PUBLISHED_BY,
-              PRICE: state.PRICE,
-              token,
-            },
-            setBooks
-          ).then((data) => {
-            setBooks(data);
-            setEditMode(false);
-          })
+          !BEING_INIT
+            ? editItemRemote({
+                BOOK_ID,
+                TITLE: state.TITLE,
+                WRITTEN_BY: state.WRITTEN_BY,
+                PUBLISHED_BY: state.PUBLISHED_BY,
+                PRICE: state.PRICE,
+                token,
+              }).then((data) => {
+                setBooks(data);
+                setEditMode(false);
+              })
+            : console.log(3)
         }
       >
         Submit!
@@ -118,6 +119,8 @@ export function ItemDisplay({
 
 export default function Item(props) {
   const [isEditMode, setEditMode] = useState(false);
+  // const [isEditMode, setEditMode] = useState(false);
+
   const { setUserPurchases, setBooks, user } = useContext(GlobalContext);
   const token = user ? user.TOKEN : '';
 

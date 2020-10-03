@@ -24,14 +24,16 @@ function Book(book) {
 
 export default function MyItems() {
   const { user } = useContext(GlobalContext);
-  console.log(user);
-  if (!user || !user.ROLE === 'User' || !user.PURCHASED_BOOKS) return null;
 
-  return (
-    <MyItemsWrap>
-      {user.PURCHASED_BOOKS.map((book, index) => (
-        <Book key={index} bookId={book} />
-      ))}
-    </MyItemsWrap>
-  );
+  if (user && user.ROLE === 'User' && user.PURCHASED_BOOKS) {
+    return (
+      <MyItemsWrap>
+        {user.PURCHASED_BOOKS.map((book, index) => (
+          <Book key={index} bookId={book} />
+        ))}
+      </MyItemsWrap>
+    );
+  } else {
+    return null;
+  }
 }

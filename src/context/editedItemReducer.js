@@ -10,7 +10,8 @@ export default function editedItemReducer(state, action) {
       return { ...state, PUBLISHED_BY: action.payload };
     case 'SET_BOOK_TITLE':
       return { ...state, TITLE: action.payload };
-
+    case 'SET_BEING_INIT':
+      return { ...state, beingInit: false };
     default:
       throw new Error();
   }

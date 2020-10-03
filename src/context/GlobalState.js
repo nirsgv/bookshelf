@@ -24,7 +24,9 @@ export const GlobalProvider = ({ children }) => {
   function removeBook(id) {
     dispatch({ type: 'REMOVE_BOOK', payload: id });
   }
-
+  function addBook(book) {
+    dispatch({ type: 'ADD_BOOK', payload: book });
+  }
   function toggleLoginScreen() {
     dispatch({ type: 'TOGGLE_LOGIN_SCREEN' });
   }
@@ -34,9 +36,9 @@ export const GlobalProvider = ({ children }) => {
   }
 
   function setUserPurchases(purchases) {
-    debugger;
     dispatch({ type: 'SET_USER_PURCHASES', payload: purchases });
   }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -46,6 +48,7 @@ export const GlobalProvider = ({ children }) => {
         isLoginScreen: state.isLoginScreen,
         setBooks,
         removeBook,
+        addBook,
         toggleLoginScreen,
         setCurrentUser,
         setUserPurchases,
