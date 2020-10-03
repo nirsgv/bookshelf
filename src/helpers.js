@@ -47,3 +47,16 @@ export const getBookById = (bookId) => {
       return book;
     });
 };
+
+export const addBookRemote = (itemData) => {
+  return fetch(window.location.origin + '/api/add', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${itemData.token}`,
+    },
+    body: JSON.stringify(itemData),
+  })
+    .then((response) => response.json())
+    .then(() => getAllItems());
+};

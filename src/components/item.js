@@ -1,9 +1,14 @@
-import React, { useReducer, useContext, useState } from 'react';
+import React, { useReducer, useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 
 import { GridItem } from './common';
 import editedItemReducer from '../context/editedItemReducer';
-import { removeItemRemote, editItemRemote, purchaseItem } from '../helpers';
+import {
+  removeItemRemote,
+  editItemRemote,
+  purchaseItem,
+  addBookRemote,
+} from '../helpers';
 
 export function ItemEdit({
   BOOK_ID,
@@ -83,7 +88,16 @@ export function ItemEdit({
                 setBooks(data);
                 setEditMode(false);
               })
-            : console.log(3)
+            : addBookRemote({
+                TITLE: state.TITLE,
+                WRITTEN_BY: state.WRITTEN_BY,
+                PUBLISHED_BY: state.PUBLISHED_BY,
+                PRICE: state.PRICE,
+                token,
+              }).then((data) => {
+                setBooks(data);
+                setEditMode(false);
+              })
         }
       >
         Submit!
@@ -93,7 +107,8 @@ export function ItemEdit({
 }
 
 export function ItemDisplay({
-  BOOK_ID,
+  // BOOK_ID,
+
   PRICE,
   WRITTEN_BY,
   PUBLISHED_BY,
@@ -123,7 +138,11 @@ export default function Item(props) {
 
   const { setUserPurchases, setBooks, user } = useContext(GlobalContext);
   const token = user ? user.TOKEN : '';
-
+  useEffect(() => {
+    if (props.BEING_INIT) {
+      setEditMode(true);
+    }
+  }, []);
   return (
     <GridItem>
       {!isEditMode ? (
