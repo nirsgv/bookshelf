@@ -1,12 +1,12 @@
 import React, { useEffect, useReducer, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
-
+import { Button } from './common';
 export default function AddItemButton() {
   const { books, setBooks, user, addBook } = useContext(GlobalContext);
 
   return (
     <div>
-      <button
+      <Button
         type='button'
         onClick={() =>
           addBook({
@@ -21,7 +21,7 @@ export default function AddItemButton() {
         }
       >
         +
-      </button>
+      </Button>
     </div>
   );
 }

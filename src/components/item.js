@@ -1,7 +1,7 @@
 import React, { useReducer, useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 
-import { GridItem } from './common';
+import { GridItem, Button } from './common/styledComponents';
 import editedItemReducer from '../context/editedItemReducer';
 import {
   removeItemRemote,
@@ -73,7 +73,7 @@ export function ItemEdit({
           }
         />
       </h2>
-      <button
+      <Button
         type='button'
         onClick={() =>
           !BEING_INIT
@@ -101,7 +101,7 @@ export function ItemEdit({
         }
       >
         Submit!
-      </button>
+      </Button>
     </>
   );
 }
@@ -152,7 +152,7 @@ export default function Item(props) {
       )}
 
       {user && user.ROLE === 'User' && (
-        <button
+        <Button
           type='button'
           onClick={() =>
             purchaseItem({
@@ -164,14 +164,14 @@ export default function Item(props) {
           }
         >
           Purchase
-        </button>
+        </Button>
       )}
       {user && user.ROLE === 'Admin' && (
         <>
-          <button type='button' onClick={() => setEditMode(!isEditMode)}>
+          <Button type='button' onClick={() => setEditMode(!isEditMode)}>
             Edit
-          </button>
-          <button
+          </Button>
+          <Button
             type='button'
             onClick={() =>
               removeItemRemote({ id: props.BOOK_ID, token }).then((data) =>
@@ -180,7 +180,7 @@ export default function Item(props) {
             }
           >
             Delete
-          </button>
+          </Button>
         </>
       )}
     </GridItem>

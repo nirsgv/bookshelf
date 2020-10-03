@@ -8,8 +8,10 @@ const GridList = styled.ul`
 `;
 
 const GridItem = styled.li`
-  background-color: ${(props) => (props.value ? '#000' : '#ddd')};
   padding: 2.8rem 1.6rem;
+  background-color: #ececec;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
 `;
 
 const SearchSection = styled.section`
@@ -61,9 +63,17 @@ const MyItemsWrap = styled.section`
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: 10rem;
   background-color: #ccc;
-  display: flex;
+  padding: 2rem;
+
+  .items {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  h3 {
+    margin-bottom: 1.2rem;
+  }
 `;
 
 const MyItemsItem = styled.div`
@@ -72,7 +82,18 @@ const MyItemsItem = styled.div`
   margin-right: 2rem;
 `;
 
+const Button = styled.button`
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  padding: 1rem;
+  color: #333;
+  margin: 1rem 0.4rem;
+  border-radius: 0.4rem;
+  border: 1px solid #aaa;
+`;
+
 export {
+  Button,
   GridList,
   GridItem,
   SearchSection,

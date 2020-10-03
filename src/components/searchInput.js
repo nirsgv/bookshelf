@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { TxtInput } from './common';
+import { Button } from './common';
 
 export default function SerachInput({ setSearchVal }) {
   const textInputRef = useRef(null);
@@ -15,7 +16,7 @@ export default function SerachInput({ setSearchVal }) {
         // onFocus={() => (focusToggleCb ? focusToggleCb(true) : null)}
         // onBlur={() => (focusToggleCb ? focusToggleCb(false) : null)}
       />
-      <button onClick={(e) => setSearchVal(textValue)}>Search!</button>
+      <Button onClick={(e) => setSearchVal(textValue)}>Search!</Button>
     </>
   );
 }

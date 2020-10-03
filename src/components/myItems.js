@@ -6,7 +6,6 @@ import { getBookById } from '../helpers';
 function BookCard({ PUBLISHED_BY, TITLE, WRITTEN_BY }) {
   return (
     <MyItemsItem>
-      <h3>{PUBLISHED_BY}</h3>
       <h3>{TITLE}</h3>
       <h3>{WRITTEN_BY}</h3>
     </MyItemsItem>
@@ -28,9 +27,12 @@ export default function MyItems() {
   if (user && user.ROLE === 'User' && user.PURCHASED_BOOKS) {
     return (
       <MyItemsWrap>
-        {user.PURCHASED_BOOKS.map((book, index) => (
-          <Book key={index} bookId={book} />
-        ))}
+        <h3>My Purchases:</h3>
+        <div className='items'>
+          {user.PURCHASED_BOOKS.map((book, index) => (
+            <Book key={index} bookId={book} />
+          ))}
+        </div>
       </MyItemsWrap>
     );
   } else {

@@ -32,12 +32,6 @@ const GlobalStyle = createGlobalStyle`
       padding: 0 2rem 2rem 2rem;
     }
 
-    button {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 300;
-      padding: 1rem;
-      color: #333;
-    }
     
     ul {
       list-style: none;
@@ -57,14 +51,19 @@ const GlobalStyle = createGlobalStyle`
     }
 
   .App-header {
-    background-color: #282c34;
-    min-height: 6rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
+    background-color: #282c34;
+    font-size: 2.1rem;
     color: white;
+    justify-content: space-between;
+    padding: 1.4rem 3rem;
+  }
+
+  .logo {
+
+    &_icon{
+      margin-right: 1.4rem;
+    }
   }
 `;
 

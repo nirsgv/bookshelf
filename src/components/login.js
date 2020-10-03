@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import { LoginSection, LoginForm } from './common/styledComponents';
 import loginScreenReducer from '../context/loginScreenReducer';
+import { Button } from './common';
 
 export default function Login() {
   const { isLoginScreen, toggleLoginScreen, setCurrentUser } = useContext(
@@ -40,23 +41,23 @@ export default function Login() {
           e.stopPropagation();
         }}
       >
-        <button onClick={toggleLoginScreen}>x</button>
-        <button
+        <Button onClick={toggleLoginScreen}>x</Button>
+        <Button
           onClick={(e) => {
             dispatch({ type: 'SET_EMAIL', payload: 'joe@gmail.com' });
             dispatch({ type: 'SET_PASSWORD', payload: 'user_joe' });
           }}
         >
           User Joe
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={(e) => {
             dispatch({ type: 'SET_EMAIL', payload: 'joe@yahoo.com' });
             dispatch({ type: 'SET_PASSWORD', payload: 'admin_joe' });
           }}
         >
           Admin Joe
-        </button>
+        </Button>
         <input
           type='text'
           name='email'
@@ -77,7 +78,7 @@ export default function Login() {
             dispatch({ type: 'SET_PASSWORD', payload: e.target.value })
           }
         />
-        <button type='submit'>submit</button>
+        <Button type='submit'>submit</Button>
       </LoginForm>
     </LoginSection>
   );
