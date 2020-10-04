@@ -1,18 +1,17 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-// const router = require('express').Router();
-app.use(express.static(path.resolve(__dirname + '/../build')));
-require('dotenv').config({
-  path: path.resolve(__dirname + '/../.env'),
-});
+const compression = require('compression');
 const booksController = require('./controllers/booksController');
 const usersController = require('./controllers/usersController');
 const publishersController = require('./controllers/publishersController');
 const writersController = require('./controllers/writersController');
 const mongoose = require('mongoose');
+app.use(express.static(path.resolve(__dirname + '/../build')));
+require('dotenv').config({
+  path: path.resolve(__dirname + '/../.env'),
+});
 const cors = require('cors');
-const compression = require('compression');
 const morgan = require('morgan');
 const normalizePort = (port) => parseInt(port, 10);
 const PORT = normalizePort(process.env.PORT || 8000);
@@ -24,12 +23,10 @@ const connection = mongoose.connection;
 connection.once('open', function () {
   console.log(`Connection with MongoDB was successful :smile:`);
 });
-
-mongoose.Promise = global.Promise; // Tells Mongoose to use ES6 promises
-mongoose.connection.on('error', (err) => {
+connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
-console.log({ 'process.env.NODE_ENV': process.env.NODE_ENV, PORT });
+mongoose.Promise = global.Promise; // Tells Mongoose to use ES6 promises
 
 app.disable('x-powered-by');
 app.use(compression());
