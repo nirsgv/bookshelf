@@ -21,7 +21,6 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     };
-    // console.log(userDetails);
 
     fetch(window.location.origin + '/api/login', {
       method: 'POST',
@@ -58,20 +57,22 @@ export default function Login() {
         >
           Admin Joe
         </Button>
+        <label htmlFor='email'>Email</label>
         <input
           type='text'
           name='email'
-          // placeholder='Email'
+          id='email'
           placeholder='joe@gmail.com'
           value={EMAIL}
           onChange={(e) => {
             dispatch({ type: 'SET_EMAIL', payload: e.target.value });
           }}
         />
+        <label htmlFor='password'>Password</label>
         <input
           type='password'
           name='password'
-          // placeholder='Password'
+          id='password'
           placeholder='user_joe'
           value={PASSWORD}
           onChange={(e) =>

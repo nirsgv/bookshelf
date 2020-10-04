@@ -35,3 +35,46 @@
   "ROLE":"Admin"
   }
 ]
+
+
+
+ [ {
+  "PUBLISHER_ID":"and",
+  "PUBLISHER_NAME":"Andromeda",
+  },
+{ 
+  "PUBLISHER_ID":"ros",
+  "PUBLISHER_NAME":"Rosterie",
+  },
+{ 
+  "PUBLISHER_ID":"pen",
+  "PUBLISHER_NAME":"Penguin",
+  }
+]
+
+
+ [ {
+  "WRITER_ID":"let",
+  "WRITER_NAME":"Leo Tolstoy",
+  },
+{ 
+  "WRITER_ID":"mdc",
+  "WRITER_NAME":"Miguel de Cervantes",
+  },
+{ 
+  "WRITER_ID":"fyd",
+  "WRITER_NAME":"Fyodor Dostoevsky",
+  },
+  {
+  "WRITER_ID":"jos",
+  "WRITER_NAME":"Jonathan Swift",
+  },
+{ 
+  "WRITER_ID":"hgw",
+  "WRITER_NAME":"H. G. Wells",
+  },
+{ 
+  "WRITER_ID":"rls",
+  "WRITER_NAME":"Robert Louis Stevenson",
+  }
+]

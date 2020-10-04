@@ -63,11 +63,23 @@ export const purchaseItem = ({ bookId, userId, token, purchased }) => {
 
 export const removePurchase = ({ bookId, userId, token, purchased }) => {
   return fetch(window.location.origin + '/api/removepurchaseditem', {
-    method: 'POST',
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ bookId, userId, token, purchased }),
   }).then((response) => response.json());
+};
+
+export const getPublisher = (publisherId) => {
+  return fetch(
+    window.location.origin + '/api/publisher/' + publisherId
+  ).then((response) => response.json());
+};
+
+export const getWriter = (writerId) => {
+  return fetch(
+    window.location.origin + '/api/writer/' + writerId
+  ).then((response) => response.json());
 };

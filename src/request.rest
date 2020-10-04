@@ -8,14 +8,19 @@
 # get http://localhost:8000/api/getbooks
 
 
+# get http://localhost:8000/api/getpublishers
+get http://localhost:8000/api/publisher/and
+
+
 # post http://localhost:8000/api/login
 
 
-post http://localhost:8000/api/add
-Content-Type: application/json
-{
-    "PRICE": 9,
-    "WRITTEN_BY": "Fog Doyle",
-    "PUBLISHED_BY": "Andromediy",
-    "TITLE": "Tihuana67"
-}
+
+# post http://localhost:8000/api/add
+# Content-Type: application/json
+# {
+#     "PRICE": 9,
+#     "WRITTEN_BY": "Fog Doyle",
+#     "PUBLISHED_BY": "Andromediy",
+#     "TITLE": "Tihuana67"
+# }

@@ -1,13 +1,16 @@
 import React, { useReducer, useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalState';
-
 import { GridItem, Button } from './common/styledComponents';
 import editedItemReducer from '../context/editedItemReducer';
+import { SelectPublisher, SelectWriter } from './select';
+
 import {
   removeItemRemote,
   editItemRemote,
   purchaseItem,
   addBookRemote,
+  getPublisher,
+  getWriter,
 } from '../helpers';
 
 export function ItemEdit({
@@ -43,26 +46,19 @@ export function ItemEdit({
           }
         />
       </h2>
-      <h4>
-        <input
-          type='text'
-          placeholder={WRITTEN_BY}
-          value={state.WRITTEN_BY}
-          onChange={(e) =>
-            dispatch({ type: 'SET_BOOK_WRITER', payload: e.target.value })
-          }
-        />
-      </h4>
-      <h6>
-        <input
-          type='text'
-          placeholder={PUBLISHED_BY}
-          value={state.PUBLISHED_BY}
-          onChange={(e) =>
-            dispatch({ type: 'SET_BOOK_PUBLISHER', payload: e.target.value })
-          }
-        />
-      </h6>
+
+      <SelectWriter
+        selectCb={(e) =>
+          dispatch({ type: 'SET_BOOK_WRITER', payload: e.target.value })
+        }
+      />
+
+      <SelectPublisher
+        selectCb={(e) =>
+          dispatch({ type: 'SET_BOOK_PUBLISHER', payload: e.target.value })
+        }
+      />
+
       <h2>
         <input
           type='text'
@@ -106,24 +102,26 @@ export function ItemEdit({
   );
 }
 
-export function ItemDisplay({
-  // BOOK_ID,
+export function ItemDisplay({ PRICE, WRITTEN_BY, PUBLISHED_BY, TITLE }) {
+  const [publisher, setPublisher] = useState('');
+  const [writer, setWriter] = useState('');
 
-  PRICE,
-  WRITTEN_BY,
-  PUBLISHED_BY,
-  TITLE,
-}) {
+  useEffect(() => {
+    getPublisher(PUBLISHED_BY).then((response) =>
+      setPublisher(response.result)
+    );
+    getWriter(WRITTEN_BY).then((response) => setWriter(response.result));
+  }, []);
   return (
     <>
       <h2>
         <span>{TITLE}</span>
       </h2>
       <h4>
-        <span>{WRITTEN_BY}</span>
+        <span>{writer && writer.WRITER_NAME}</span>
       </h4>
       <h6>
-        <span>{PUBLISHED_BY}</span>
+        <span>{publisher && publisher.PUBLISHER_NAME}</span>
       </h6>
       <h2>
         <span>${PRICE}</span>
@@ -134,7 +132,6 @@ export function ItemDisplay({
 
 export default function Item(props) {
   const [isEditMode, setEditMode] = useState(false);
-  // const [isEditMode, setEditMode] = useState(false);
 
   const { setUserPurchases, setBooks, user } = useContext(GlobalContext);
   const token = user ? user.TOKEN : '';
@@ -168,7 +165,7 @@ export default function Item(props) {
           {!isOwned ? 'Purchase' : 'Purchased...'}
         </Button>
       )}
-      {user && user.ROLE === 'Admin' && (
+      {user && user.ROLE === 'Admin' && !isEditMode && (
         <>
           <Button type='button' onClick={() => setEditMode(!isEditMode)}>
             Edit

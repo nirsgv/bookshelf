@@ -8,6 +8,8 @@ require('dotenv').config({
 });
 const booksController = require('./controllers/booksController');
 const usersController = require('./controllers/usersController');
+const publishersController = require('./controllers/publishersController');
+const writersController = require('./controllers/writersController');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const compression = require('compression');
@@ -50,7 +52,7 @@ app.post(
   usersController.verifyToken,
   usersController.purchaseBook
 );
-app.post(
+app.delete(
   '/api/removepurchaseditem',
   usersController.verifyToken,
   usersController.removePurchaseOnServer
@@ -59,6 +61,12 @@ app.put('/api/update', usersController.verifyToken, booksController.updateBook);
 app.get('/api/bookbytitle/:title', booksController.searchBookByTitle);
 app.get('/api/bookbyid/:id', booksController.searchBookById);
 app.post('/api/login', usersController.authenticateUser);
+
+app.get('/api/getpublishers', publishersController.getAllPublishers);
+app.get('/api/publisher/:id', publishersController.getPublisherById);
+
+app.get('/api/getwriters', writersController.getAllWriters);
+app.get('/api/writer/:id', writersController.getWriterById);
 
 app.get('/', function (req, res) {
   return res.sendFile(path.resolve(__dirname + '/../build/index.html'));
