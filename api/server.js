@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const router = require('express').Router();
+// const router = require('express').Router();
 app.use(express.static(path.resolve(__dirname + '/../build')));
 require('dotenv').config({
   path: path.resolve(__dirname + '/../.env'),
@@ -39,44 +39,40 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-router.get('/api/books', booksController.getBooks);
-router.get('/api/book/:id', booksController.getBook);
-router.delete(
+app.get('/api/books', booksController.getBooks);
+app.get('/api/book/:id', booksController.getBook);
+app.delete(
   '/api/remove/:id',
   usersController.verifyToken,
   booksController.removeBook
 );
-router.post('/api/add', usersController.verifyToken, booksController.addBook);
-router.post(
+app.post('/api/add', usersController.verifyToken, booksController.addBook);
+app.post(
   '/api/purchase',
   usersController.verifyToken,
   usersController.purchaseBook
 );
-router.delete(
+app.delete(
   '/api/removepurchaseditem',
   usersController.verifyToken,
   usersController.removePurchaseOnServer
 );
-router.put(
-  '/api/update',
-  usersController.verifyToken,
-  booksController.updateBook
-);
-router.get('/api/bookbytitle/:title', booksController.searchBookByTitle);
-router.get('/api/bookbyid/:id', booksController.searchBookById);
-router.post('/api/login', usersController.authenticateUser);
+app.put('/api/update', usersController.verifyToken, booksController.updateBook);
+app.get('/api/bookbytitle/:title', booksController.searchBookByTitle);
+app.get('/api/bookbyid/:id', booksController.searchBookById);
+app.post('/api/login', usersController.authenticateUser);
 
-router.get('/api/getpublishers', publishersController.getAllPublishers);
-router.get('/api/publisher/:id', publishersController.getPublisherById);
+app.get('/api/getpublishers', publishersController.getAllPublishers);
+app.get('/api/publisher/:id', publishersController.getPublisherById);
 
-router.get('/api/getwriters', writersController.getAllWriters);
-router.get('/api/writer/:id', writersController.getWriterById);
+app.get('/api/getwriters', writersController.getAllWriters);
+app.get('/api/writer/:id', writersController.getWriterById);
 
-router.get('/', function (req, res) {
+app.get('/', function (req, res) {
   return res.sendFile(path.resolve(__dirname + '/../build/index.html'));
 });
 
-router.listen(PORT, (err) => {
+app.listen(PORT, (err) => {
   if (err) throw err;
   console.log('server started');
 });
