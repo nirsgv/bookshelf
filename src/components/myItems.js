@@ -1,11 +1,28 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
-import { MyItemsWrap, MyItemsBook } from './common/styledComponents';
-import { getBookById } from '../helpers';
+import { MyItemsWrap, MyItemsBook, Button } from './common/styledComponents';
+import { getBookById, removePurchase } from '../helpers';
 
-function BookCard({ PUBLISHED_BY, TITLE, WRITTEN_BY }) {
+function BookCard({ TITLE, WRITTEN_BY, BOOK_ID }) {
+  const { setUserPurchases, user } = useContext(GlobalContext);
+
   return (
     <MyItemsBook>
+      <Button
+        onClick={() =>
+          removePurchase({
+            bookId: BOOK_ID,
+            userId: user.USER_ID,
+            purchased: user.PURCHASED_BOOKS,
+            token: user.TOKEN,
+          }).then((data) => {
+            console.log(data.returnPurchased);
+            setUserPurchases(data.returnPurchased);
+          })
+        }
+      >
+        x
+      </Button>
       <h3>{TITLE}</h3>
       <h3>{WRITTEN_BY}</h3>
     </MyItemsBook>
@@ -23,14 +40,13 @@ function Book(book) {
 
 export default function MyItems() {
   const { user } = useContext(GlobalContext);
-
   if (user && user.ROLE === 'User' && user.PURCHASED_BOOKS) {
     return (
       <MyItemsWrap>
         <h3>My Purchases:</h3>
         <div className='items'>
           {user.PURCHASED_BOOKS.map((book, index) => (
-            <Book key={index} bookId={book} />
+            <Book key={book} bookId={book} />
           ))}
         </div>
       </MyItemsWrap>

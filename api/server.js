@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const jwt = require('jsonwebtoken');
 
 app.use(express.static(path.resolve(__dirname + '/../build')));
 require('dotenv').config({
@@ -45,27 +44,21 @@ app.delete(
   usersController.verifyToken,
   booksController.removeBook
 );
-// app.post('/api/add', booksController.addBook);
 app.post('/api/add', usersController.verifyToken, booksController.addBook);
 app.post(
   '/api/purchase',
   usersController.verifyToken,
   usersController.purchaseBook
 );
-
+app.post(
+  '/api/removepurchaseditem',
+  usersController.verifyToken,
+  usersController.removePurchaseOnServer
+);
 app.put('/api/update', usersController.verifyToken, booksController.updateBook);
 app.get('/api/bookbytitle/:title', booksController.searchBookByTitle);
 app.get('/api/bookbyid/:id', booksController.searchBookById);
 app.post('/api/login', usersController.authenticateUser);
-
-// FORMAT OF TOKEN
-// Authorization: Bearer <access_token>
-
-function tmpMiddle(req, res, next) {
-  //Get auth header value
-  console.log('wedwedwef');
-  next();
-}
 
 app.get('/', function (req, res) {
   return res.sendFile(path.resolve(__dirname + '/../build/index.html'));

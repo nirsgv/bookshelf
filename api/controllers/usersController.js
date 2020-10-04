@@ -81,3 +81,29 @@ exports.purchaseBook = (req, res) => {
     res.status(403);
   }
 };
+
+// remove a purchased item
+exports.removePurchaseOnServer = (req, res) => {
+  const { bookId, userId, purchased } = req.body;
+  console.log(req.body);
+
+  let returnPurchased = purchased.filter(
+    (purchasedItem) => purchasedItem !== bookId
+  );
+
+  if (req.decoded.role === 'User') {
+    usersStore.findOneAndUpdate(
+      { USER_ID: userId },
+      { $pull: { PURCHASED_BOOKS: { $in: [bookId] } } },
+      function (err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.json({ returnPurchased, message: 'Removed a purchased item' });
+        }
+      }
+    );
+  } else {
+    res.status(403);
+  }
+};

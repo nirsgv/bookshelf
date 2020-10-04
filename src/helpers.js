@@ -16,17 +16,6 @@ export const removeItemRemote = ({ id, token }) => {
     .then((data) => getAllItems());
 };
 
-export const purchaseItem = ({ bookId, userId, token, purchased }) => {
-  return fetch(window.location.origin + '/api/purchase', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ bookId, userId, token, purchased }),
-  }).then((response) => response.json());
-};
-
 export const editItemRemote = (itemData) => {
   return fetch(window.location.origin + '/api/update', {
     method: 'PUT',
@@ -59,4 +48,26 @@ export const addBookRemote = (itemData) => {
   })
     .then((response) => response.json())
     .then(() => getAllItems());
+};
+
+export const purchaseItem = ({ bookId, userId, token, purchased }) => {
+  return fetch(window.location.origin + '/api/purchase', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ bookId, userId, token, purchased }),
+  }).then((response) => response.json());
+};
+
+export const removePurchase = ({ bookId, userId, token, purchased }) => {
+  return fetch(window.location.origin + '/api/removepurchaseditem', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ bookId, userId, token, purchased }),
+  }).then((response) => response.json());
 };
