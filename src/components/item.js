@@ -36,39 +36,47 @@ export function ItemEdit({
 
   return (
     <>
-      <h2>
+      <div>
+        <label htmlFor='titleInput'>Title:</label>
+
         <input
           type='text'
+          id='titleInput'
           placeholder={TITLE}
           value={state.TITLE}
           onChange={(e) =>
             dispatch({ type: 'SET_BOOK_TITLE', payload: e.target.value })
           }
         />
-      </h2>
+      </div>
+      <div>
+        <SelectWriter
+          selectCb={(e) =>
+            dispatch({ type: 'SET_BOOK_WRITER', payload: e.target.value })
+          }
+        />
+      </div>
+      <div>
+        <SelectPublisher
+          selectCb={(e) =>
+            dispatch({ type: 'SET_BOOK_PUBLISHER', payload: e.target.value })
+          }
+        />
+      </div>
 
-      <SelectWriter
-        selectCb={(e) =>
-          dispatch({ type: 'SET_BOOK_WRITER', payload: e.target.value })
-        }
-      />
+      <div>
+        <label htmlFor='priceInput'>Title:</label>
 
-      <SelectPublisher
-        selectCb={(e) =>
-          dispatch({ type: 'SET_BOOK_PUBLISHER', payload: e.target.value })
-        }
-      />
-
-      <h2>
         <input
           type='text'
+          id='priceInput'
           placeholder={PRICE}
           value={state.PRICE}
           onChange={(e) =>
             dispatch({ type: 'SET_BOOK_PRICE', payload: e.target.value })
           }
         />
-      </h2>
+      </div>
       <Button
         type='button'
         onClick={() =>

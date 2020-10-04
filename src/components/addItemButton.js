@@ -1,8 +1,9 @@
-import React, { useEffect, useReducer, useContext } from 'react';
+import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import { Button } from './common';
+import { v4 as uuidv4 } from 'uuid';
 export default function AddItemButton() {
-  const { books, setBooks, user, addBook } = useContext(GlobalContext);
+  const { addBook } = useContext(GlobalContext);
 
   return (
     <div>
@@ -10,11 +11,11 @@ export default function AddItemButton() {
         type='button'
         onClick={() =>
           addBook({
-            BOOK_ID: '2354345g-r34636-40d5-a44b-c0d6c7ad02fe',
-            PRICE: 19,
+            BOOK_ID: uuidv4(),
+            PRICE: 'Item Cost',
             WRITTEN_BY: 'Jay Shetty',
             PUBLISHED_BY: 'Andromediy',
-            TITLE: 'Think Like a Monk: Train Your Mind for Peace',
+            TITLE: 'Item Title',
             BEING_INIT: true,
             __v: 0,
           })

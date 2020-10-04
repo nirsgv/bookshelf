@@ -41,6 +41,10 @@ const GlobalStyle = createGlobalStyle`
       width: 10rem;
     }
     
+    label {
+      margin-right: 1rem;
+    }
+
     svg {
     width: 1em;
     fill: currentColor;

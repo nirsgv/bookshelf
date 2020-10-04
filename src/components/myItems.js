@@ -3,7 +3,7 @@ import { GlobalContext } from '../context/GlobalState';
 import { MyItemsWrap, MyItemsBook, Button } from './common/styledComponents';
 import { getBookById, removePurchase } from '../helpers';
 
-function BookCard({ TITLE, WRITTEN_BY, BOOK_ID }) {
+function BookCard({ TITLE, BOOK_ID }) {
   const { setUserPurchases, user } = useContext(GlobalContext);
 
   return (
@@ -24,7 +24,6 @@ function BookCard({ TITLE, WRITTEN_BY, BOOK_ID }) {
         x
       </Button>
       <h3>{TITLE}</h3>
-      <h3>{WRITTEN_BY}</h3>
     </MyItemsBook>
   );
 }

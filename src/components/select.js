@@ -13,13 +13,16 @@ export function SelectPublisher({ selectCb }) {
   };
 
   return (
-    <select onChange={selectCb}>
-      {options.map((publisher) => (
-        <option value={publisher.PUBLISHER_ID} key={publisher.PUBLISHER_ID}>
-          {publisher.PUBLISHER_NAME}
-        </option>
-      ))}
-    </select>
+    <>
+      <label htmlFor='publisherSelect'>Publisher:</label>
+      <select onChange={selectCb} id='publisherSelect'>
+        {options.map((publisher) => (
+          <option value={publisher.PUBLISHER_ID} key={publisher.PUBLISHER_ID}>
+            {publisher.PUBLISHER_NAME}
+          </option>
+        ))}
+      </select>
+    </>
   );
 }
 
@@ -36,12 +39,15 @@ export function SelectWriter({ selectCb }) {
   };
 
   return (
-    <select onChange={selectCb}>
-      {options.map((writer) => (
-        <option value={writer.WRITER_ID} key={writer.WRITER_ID}>
-          {writer.WRITER_NAME}
-        </option>
-      ))}
-    </select>
+    <>
+      <label htmlFor='writerSelect'>Writer:</label>
+      <select onChange={selectCb} id='writerSelect'>
+        {options.map((writer) => (
+          <option value={writer.WRITER_ID} key={writer.WRITER_ID}>
+            {writer.WRITER_NAME}
+          </option>
+        ))}
+      </select>
+    </>
   );
 }
